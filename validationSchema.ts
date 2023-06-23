@@ -8,6 +8,6 @@ export default Joi.object({
   [CONFIG_ENUM.HOST]: Joi.string(),
   [CONFIG_ENUM.TYPE]: Joi.string().valid('mysql'),
   [CONFIG_ENUM.PASSWORD]: Joi.string(),
-  [CONFIG_ENUM.USERNAME]: Joi.string(),
+  [CONFIG_ENUM.USER_NAME]: Joi.string(),
   [CONFIG_ENUM.PORT]: Joi.number(),
 });

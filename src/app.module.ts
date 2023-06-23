@@ -1,7 +1,8 @@
 import { Module } from '@nestjs/common';
 import { ConfigModule } from '@nestjs/config';
 
-import { ormConfigGenerator, validationSchema } from '~/config';
+import validationSchema from 'validationSchema';
+import { ormConfigGenerator } from '~/ormconfig';
 import { TestModule } from './test/test.module';
 import { TypeOrmModule, TypeOrmModuleOptions } from '@nestjs/typeorm';
 
@@ -14,9 +15,10 @@ import { TypeOrmModule, TypeOrmModuleOptions } from '@nestjs/typeorm';
       //验证加载的环境变量是否正确
       validationSchema,
     }),
-    TypeOrmModule.forRootAsync({
-      useFactory: ormConfigGenerator as () => TypeOrmModuleOptions,
-    }),
+    TypeOrmModule.forRoot(
+      //这边前面已经验证过环境变量的类型了 所有这里我们的生成OrmConfig的类型可以确定
+      ormConfigGenerator() as TypeOrmModuleOptions,
+    ),
     TestModule,
   ],
   controllers: [],
