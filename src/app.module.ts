@@ -3,7 +3,9 @@ import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { ConfigModule } from '@nestjs/config';
 
-import { moduleConfigGenerator } from '~/config';
+import { moduleConfigGenerator, ormConfigGenerator } from '~/config';
+import { TestModule } from './test/test.module';
+import { TypeOrmModule, TypeOrmModuleOptions } from '@nestjs/typeorm';
 
 @Module({
   imports: [
@@ -12,9 +14,14 @@ import { moduleConfigGenerator } from '~/config';
       envFilePath: [`.env.${process.env.NODE_ENV}`, '.env'],
       load: [moduleConfigGenerator],
     }),
+    TestModule,
+    TypeOrmModule.forRootAsync({
+      useFactory: ormConfigGenerator as () => TypeOrmModuleOptions,
+    }),
   ],
   controllers: [AppController],
   providers: [AppService],
 })
 export class AppModule {}
-console.log(moduleConfigGenerator(), 'configkkk');
+
+console.log(ormConfigGenerator());

@@ -12,10 +12,10 @@ services:
     environment:
       MYSQL_ROOT_PASSWORD: root
     ports:
-      - 9999:9999
+      - 12000:3306
 
   adminer:
     image: adminer
     restart: always
     ports:
-      - 8080:8080
+      - 8090:8080
