@@ -14,14 +14,12 @@ import { TypeOrmModule, TypeOrmModuleOptions } from '@nestjs/typeorm';
       envFilePath: [`.env.${process.env.NODE_ENV}`, '.env'],
       load: [moduleConfigGenerator],
     }),
-    TestModule,
     TypeOrmModule.forRootAsync({
       useFactory: ormConfigGenerator as () => TypeOrmModuleOptions,
     }),
+    TestModule,
   ],
   controllers: [AppController],
   providers: [AppService],
 })
 export class AppModule {}
-
-console.log(ormConfigGenerator());
