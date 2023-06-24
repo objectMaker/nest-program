@@ -2,8 +2,7 @@ import { Module } from '@nestjs/common';
 import { ConfigModule } from '@nestjs/config';
 
 import validationSchema from 'validationSchema';
-import { ormConfigGenerator } from '~/ormconfig';
-import { TestModule } from './test/test.module';
+import { ormConfigGenerator } from '~/ormConfig';
 import { TypeOrmModule, TypeOrmModuleOptions } from '@nestjs/typeorm';
 
 @Module({
@@ -19,7 +18,6 @@ import { TypeOrmModule, TypeOrmModuleOptions } from '@nestjs/typeorm';
       //这边前面已经验证过环境变量的类型了 所有这里我们的生成OrmConfig的类型可以确定
       ormConfigGenerator() as TypeOrmModuleOptions,
     ),
-    TestModule,
   ],
   controllers: [],
   providers: [],
